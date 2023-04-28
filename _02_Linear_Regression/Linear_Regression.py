@@ -18,7 +18,7 @@ def lasso(data):
     x, y = read_data()
     m = x.shape[0]
     epochs=100
-
+    Lambda=10
     X = np.concatenate((np.ones((m, 1)), x), axis=1)
     xMat = np.mat(X)
     yMat = np.mat(y.reshape(-1, 1))
