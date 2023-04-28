@@ -8,41 +8,30 @@ except ImportError as e:
     os.system("sudo pip3 install numpy")
     import numpy as np
 
-
-
 def ridge(data):
     X, y = read_data()
     weight = np.matmul(np.linalg.inv(np.matmul(X.T, X)), np.matmul(X.T, y))
     return weight @ data
 
-
 def lasso(data):
     X, y = read_data()
-    alpha = 0.001
-    step = 0.001
-    w,b=np.zeros(6),0
-    m=6
-    for _ in range(100):
-        y_hat=np.dot(X,w)+b
-        dw = np.dot(X, (y_hat - y)) / m + alpha * p(w)
-        db = np.sum(y_hat - y) / m
-        w-= step * dw
-        b -= step * db
-    return np.dot(X,w)+b
-
-#l1正则化项求导
-def p(w):
-    pl1=[elem for elem in w]
-    for i in range(len(pl1)):
-        if pl1[i]>0:
-            pl1[i]=1
-        elif pl1[i]<0:
-            pl1[i]=-1
-        else:
-            pl1[i]=0
-    pl1=np.array(pl1)
-    return pl1
-
+    # 计算总数据量
+    m = X.shape[0]
+    # 给x添加偏置项
+    X = np.concatenate((np.ones((m, 1)), X), axis=1)
+    # 计算总特征数
+    n = X.shape[1]
+    # 初始化W的值,要变成矩阵形式
+    W = np.mat(np.ones((n, 1)))
+    # X转为矩阵形式
+    xMat = np.mat(X)
+    # y转为矩阵形式，这步非常重要,且要是m x 1的维度格式
+    yMat = np.mat(y.reshape(-1, 1))
+    # 循环epochs次
+    for i in range(100):
+        gradient = xMat.T * (xMat * W - yMat) / m + Lambda * np.sign(W)
+        W = W - a * gradient
+    return np.dot(X,W)
 
 
 def read_data(path='./data/exp02/'):
