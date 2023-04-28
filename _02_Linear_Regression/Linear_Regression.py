@@ -41,7 +41,6 @@ def p(w):
         else:
             pl1[i]=0
     pl1=np.array(pl1)
-    pl1=pl1.reshape((-1,))
     return pl1
 
 
