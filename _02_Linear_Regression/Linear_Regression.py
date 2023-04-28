@@ -14,7 +14,18 @@ def ridge(data):
     return weight @ data
 
 def lasso(data):
-    return ridge(data)
+    X, y = read_data()
+    alpha = 10
+    epochs = 100
+    learning_rate = 0.001
+    m, n = X.shape
+    theta = np.zeros((n, 1))
+    for i in range(epochs)
+        gradient = np.dot(X.T, np.dot(X, theta) - y) + alpha * np.sign(theta)
+        theta -= learning_rate * gradient
+        theta[np.abs(theta) < alpha] = 0
+    y_pred = np.dot(X,theta)
+    return y_pred
 
 
 
