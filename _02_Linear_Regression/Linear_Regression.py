@@ -20,9 +20,9 @@ def lasso(data):
     X, y = read_data()
     alpha = 0.001
     step = 0.001
-    w,b=np.zeros((X.shape[1],6)),0
-    m=X.shape[0]
-    for _ in range(200):
+    w,b=np.zeros(6),0
+    m=6
+    for _ in range(100):
         y_hat=np.dot(X,w)+b
         dw = np.dot(X, (y_hat - y)) / m + alpha * p(w)
         db = np.sum(y_hat - y) / m
