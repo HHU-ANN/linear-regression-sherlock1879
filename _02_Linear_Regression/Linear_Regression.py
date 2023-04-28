@@ -15,6 +15,8 @@ def ridge(data):
 
 def lasso(data):
     X, y = read_data()
+    a = 0.001
+    Lambda = 0
     # 计算总数据量
     m = X.shape[0]
     # 给x添加偏置项
