@@ -1,6 +1,7 @@
 # 最终在main函数中传入一个维度为6的numpy数组，输出预测值
 
 import os
+import copy
 
 try:
     import numpy as np
@@ -16,24 +17,30 @@ def ridge(data):
 def lasso(data):
     x, y = read_data()
     m = x.shape[0]
-    epochs=1000
-    Lambda=10
-    a=0.001
-    # 给x添加偏置项
+    epochs=100
+
     X = np.concatenate((np.ones((m, 1)), x), axis=1)
-    # 计算总特征数
-    n = X.shape[1]
-    # 初始化W的值,要变成矩阵形式
-    W = np.mat(np.ones((n, 1)))
-    # X转为矩阵形式
     xMat = np.mat(X)
-    # y转为矩阵形式，这步非常重要,且要是m x 1的维度格式
     yMat = np.mat(y.reshape(-1, 1))
-    # 循环epochs次
-    for i in range(epochs):
-        gradient = xMat.T * (xMat * W - yMat) / m + Lambda * np.sign(W)
-        W = W - a * gradient
-    return np.dot(X,W)
+
+    w = np.ones(X.shape[1]).reshape(-1, 1)
+
+    for n in range(epochs):
+
+        out_w = copy.copy(w)
+        for i, item in enumerate(w):
+            # 在每一个W值上找到使损失函数收敛的点
+            for j in range(epochs):
+                h = xMat * w
+                gradient = xMat[:, i].T * (h - yMat) / m + Lambda * np.sign(w[i])
+                w[i] = w[i] - gradient * learning_rate
+                if abs(gradient) < 1e-3:
+                    break
+        out_w = np.array(list(map(lambda x: abs(x) < 1e-3, out_w - w)))
+        if out_w.all():
+            break
+    return np.dot(X,w)
+
 
 
 def read_data(path='./data/exp02/'):
