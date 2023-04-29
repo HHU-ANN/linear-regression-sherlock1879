@@ -20,14 +20,13 @@ def lasso(data):
     learning_rate = 0.001
     m,n=X.shape
     theta = np.zeros((n, 1))
+    gradient = np.zeros((n,1))
     for i in range(epochs):
         gradient = np.dot(X.T, np.dot(X, theta) - y) + alpha * np.sign(theta)
         theta -= learning_rate * gradient
         theta[np.abs(theta) < alpha] = 0
     y_pred = X@theta
     return y_pred
-
-
 
 def read_data(path='./data/exp02/'):
     x = np.load(path + 'X_train.npy')
