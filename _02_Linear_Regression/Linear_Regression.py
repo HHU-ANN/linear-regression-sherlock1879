@@ -18,11 +18,12 @@ def lasso(data):
     alpha = 10
     epochs = 100
     learning_rate = 0.001
-    m, n = X.shape
+    m=X.shape[0]
+    n=X.shape[1]
     theta = np.zeros((m, 1))
     for i in range(epochs):
         gradient = np.dot(X.T, np.dot(X, theta) - y) + alpha * np.sign(theta)
-        theta -= learning_rate * gradient
+        theta -= np.multiply(learning_rate,gradient)
         theta[np.abs(theta) < alpha] = 0
     y_pred = X@theta
     return y_pred
