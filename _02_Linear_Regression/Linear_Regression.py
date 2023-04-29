@@ -18,8 +18,7 @@ def lasso(data):
     alpha = 10
     epochs = 100
     learning_rate = 0.001
-    m=X.shape[0]
-    n=X.shape[1]
+    m,n=X.shape
     theta = np.zeros((m, 1))
     for i in range(epochs):
         gradient = np.dot(X.T, np.dot(X, theta) - y) + alpha * np.sign(theta)
