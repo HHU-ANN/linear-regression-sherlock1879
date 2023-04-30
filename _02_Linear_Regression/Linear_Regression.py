@@ -28,12 +28,8 @@ def lasso(data):
     for i in range(epochs):
         gradient = (1/m)*np.dot(X.T, np.dot(X, theta) - y_col) + alpha * np.sign(theta)
         theta = theta - learning_rate * gradient
-        print(theta)
-        print(gradient)
-        print(data)
-        #theta[np.abs(theta) < alpha] = 0
+        theta[np.abs(theta) < alpha] = 0
     y_pred = data@theta
-    print(y_pred)
     return y_pred
 
 def read_data(path='./data/exp02/'):
