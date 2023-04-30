@@ -15,13 +15,13 @@ def ridge(data):
     return weight @ data
  #计算总数据量
 def lasso(data):
-    x,y=read_data()
+    x,y=read_data()#x(404,6)y(404,)
     epochs=100
     Lambda=0.1
     a=0.001#learning_rate
     m=x.shape[0]
     #给x添加偏置项
-    X = np.concatenate((np.ones((m,1)),x),axis=1)
+    X = np.concatenate((np.ones((m,1)),x),axis=1)#(m,n+1)
     #计算总特征数
     n = X.shape[1]
     #初始化W的值,要变成矩阵形式
@@ -34,7 +34,9 @@ def lasso(data):
     for i in range(epochs):
         gradient = xMat.T*(xMat*W-yMat)/m + Lambda * np.sign(W)
         W=W-a * gradient
-    return np.dot(data,W)
+    Data=np.concatenate((np.ones((m,1)),data),axis=1)
+    dataMat=np.mat(Data)
+    return np.dot(dataMat,W)
 
 def read_data(path='./data/exp02/'):
     x = np.load(path + 'X_train.npy')
