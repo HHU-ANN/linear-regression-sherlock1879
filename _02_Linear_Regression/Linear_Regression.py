@@ -21,14 +21,15 @@ def lasso(data):
     #y(404,)这是行向量！！！
     #theta(6,1)
     alpha = 10
-    epochs = 100
+    epochs = 5
     learning_rate = 0.001
     m,n=X.shape
     theta = np.zeros((n,1))
     for i in range(epochs):
         gradient = np.dot(X.T, np.dot(X, theta) - y_col)/m + alpha * np.sign(theta)
+        print(gradient)
         theta = theta - learning_rate * gradient
-        #theta[np.abs(theta) < alpha] = 0
+       # theta[np.abs(theta) < alpha] = 0
     y_pred = data@theta
     print(theta)
     print(data)
