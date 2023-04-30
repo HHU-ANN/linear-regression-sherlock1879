@@ -18,7 +18,7 @@ def lasso(data):
     x,y=read_data()#x(404,6)y(404,)
     epochs=100
     Lambda=0.1
-    a=0.114#learning_rate
+    a=0.73#learning_rate
     m=x.shape[0]
     #给x添加偏置项
     X = np.concatenate((np.ones((m,1)),x),axis=1)#(m,n+1)
