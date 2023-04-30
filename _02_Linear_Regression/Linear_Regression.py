@@ -34,7 +34,7 @@ def lasso(data):
         # print(np.dot(X.T, np.dot(X, theta) - y).shape)
         # print((alpha * np.sign(theta)).shape)
         # print(gradient.shape)
-        print(y)
+        print(y.shape)
         theta = theta - learning_rate * gradient
         #theta[np.abs(theta) < alpha] = 0
     y_pred = data @ theta
