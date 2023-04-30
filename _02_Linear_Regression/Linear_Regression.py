@@ -12,8 +12,6 @@ def ridge(data):
     X, y = read_data()
     weight = np.matmul(np.linalg.inv(np.matmul(X.T, X)), np.matmul(X.T, y))
     y_pred=weight @ data
-    print(y_pred.shape)
-    print(data.shape)
     return weight @ data
 
 def lasso(data):
@@ -29,8 +27,8 @@ def lasso(data):
     theta = np.zeros((n,1))
     for i in range(epochs):
         gradient = np.dot(X.T, np.dot(X, theta) - y_col)/m + alpha * np.sign(theta)
-        # print(gradient.shape)#应该是一个列向量
         theta = theta - learning_rate * gradient
+        print(data.shape)
         #theta[np.abs(theta) < alpha] = 0
     y_pred = data @ theta
     return y_pred
