@@ -22,7 +22,7 @@ def lasso(data):
     #theta(6,1)
     alpha = 0.1
     epochs = 25000
-    learning_rate = 1e-9
+    learning_rate = 1e-12
     m,n=X.shape
     theta = np.zeros((n,1))
     for i in range(epochs):
