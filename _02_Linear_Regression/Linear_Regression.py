@@ -15,6 +15,10 @@ def ridge(data):
 
 def lasso(data):
     X, y = read_data()
+    y=y.T
+    #X(404,6)
+    #y(404,)这是行向量！！！
+    #theta(6,1)
     alpha = 10
     epochs = 10
     learning_rate = 0.001
