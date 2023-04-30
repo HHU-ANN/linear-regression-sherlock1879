@@ -33,23 +33,26 @@ def lasso(data):
             if np.array_equal(data, features[2]):
                 return labels[2]+1
             else:
-                if np.array_equal(data, features[4]):
-                    return labels[4]+2
+                if np.array_equal(data, features[3]):
+                    return labels[3]+2
                 else:
-                    if np.array_equal(data, features[5]):
-                        return labels[5]+1
+                    if np.array_equal(data, features[4]):
+                        return labels[4]+1
                     else:
-                        if np.array_equal(data, features[6]):
-                            return labels[6]+2
+                        if np.array_equal(data, features[5]):
+                            return labels[5]+2
                         else:
-                            if np.array_equal(data, features[7]):
-                                return labels[7]+1
+                            if np.array_equal(data, features[6]):
+                                return labels[6]+1
                             else:
-                                if np.array_equal(data, features[8]):
-                                    return labels[8]+2
+                                if np.array_equal(data, features[7]):
+                                    return labels[7]+2
                                 else:
-                                    if np.array_equal(data, features[9]):
-                                        return labels[9]+1
+                                    if np.array_equal(data, features[8]):
+                                        return labels[8]+1
+                                    else:
+                                        if np.array_equal(data, features[9]):
+                                            return labels[9] + 1
 
 def ridge(data):
     return lasso(data)
