@@ -12,7 +12,7 @@ def ridge(data):
     X, y = read_data()
     m=X.shape[0]
     n=X.shape[1]
-    Lambda=500
+    Lambda=550
     weight = np.matmul(np.linalg.inv(np.matmul(X.T, X)+Lambda*np.identity(n)), np.matmul(X.T, y))
     y_pred=weight @ data
     return weight @ data
@@ -23,7 +23,7 @@ def lasso(data):
     #X(404,6)
     #y(404,)这是行向量！！！
     #theta(6,1)
-    alpha = 500
+    alpha = 450
     epochs = 25000
     learning_rate = 1e-9
     m,n=X.shape
