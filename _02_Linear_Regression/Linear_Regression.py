@@ -24,16 +24,15 @@ def lasso(data):
     m,n=X.shape
     theta = np.zeros((n,1))
     for i in range(epochs):
-        gradient = np.dot(X.T, np.dot(X, theta) - y) + alpha * np.sign(theta)
-        # print(X.shape)
-        # print(y.shape)
-        # print(np.dot(X, theta).shape)
-        # print((np.dot(X, theta) - y).shape)
-        # print(X.T.shape)
-        # print(np.dot(X.T, np.dot(X, theta) - y).shape)
-        # print((alpha * np.sign(theta)).shape)
-        # print(gradient.shape)
-        print((y.transpose()).shape)
+        gradient = np.dot(X.T, np.dot(X, theta) - y.T) + alpha * np.sign(theta)
+        print(X.shape)
+        print(y.shape)
+        print(np.dot(X, theta).shape)
+        print((np.dot(X, theta) - y).shape)
+        print(X.T.shape)
+        print(np.dot(X.T, np.dot(X, theta) - y).shape)
+        print((alpha * np.sign(theta)).shape)
+        print(gradient.shape)
         theta = theta - learning_rate * gradient
         #theta[np.abs(theta) < alpha] = 0
     y_pred = data @ theta
