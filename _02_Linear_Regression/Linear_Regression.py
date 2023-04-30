@@ -17,7 +17,7 @@ def ridge(data):
 def lasso(data):
     x,y=read_data()#x(404,6)y(404,)
     epochs=100000
-    Lambda=0.01
+    Lambda=1e-12
     a=1e-13#learning_rate
     m=x.shape[0]
     #给x添加偏置项
