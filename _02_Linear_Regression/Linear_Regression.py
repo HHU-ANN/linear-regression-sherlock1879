@@ -31,8 +31,7 @@ def lasso(data):
         theta = theta - learning_rate * gradient
        # theta[np.abs(theta) < alpha] = 0
     y_pred = data@theta
-    print(theta)
-    print(data)
+    print(y_pred)
     return y_pred
 
 def read_data(path='./data/exp02/'):
