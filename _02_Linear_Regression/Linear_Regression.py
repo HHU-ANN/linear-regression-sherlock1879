@@ -16,9 +16,9 @@ def ridge(data):
  #计算总数据量
 def lasso(data):
     x,y=read_data()#x(404,6)y(404,)
-    epochs=10
+    epochs=1e5
     Lambda=0.1
-    a=0.001#learning_rate
+    a=1e-12#learning_rate
     m=x.shape[0]
     #给x添加偏置项
     X = np.concatenate((np.ones((m,1)),x),axis=1)#(m,n+1)
@@ -33,12 +33,12 @@ def lasso(data):
     #循环epochs次
     for i in range(epochs):
         gradient = xMat.T*(xMat*W-yMat)/m + Lambda * np.sign(W)
-        print("xMat.T*(xMat*W-yMat)/m")
-        print(xMat.T*(xMat*W-yMat)/m)
-        print("Lambda * np.sign(W):")
-        print(Lambda * np.sign(W))
-        print("gradient:")
-        print(gradient)
+        # print("xMat.T*(xMat*W-yMat)/m")
+        # print(xMat.T*(xMat*W-yMat)/m)
+        # print("Lambda * np.sign(W):")
+        # print(Lambda * np.sign(W))
+        # print("gradient:")
+        # print(gradient)
         W=W-a * gradient
     Data = np.concatenate([data, [1]])
     return np.dot(Data,W)
