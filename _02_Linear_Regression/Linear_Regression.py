@@ -34,9 +34,8 @@ def lasso(data):
     for i in range(epochs):
         gradient = xMat.T*(xMat*W-yMat)/m + Lambda * np.sign(W)
         W=W-a * gradient
-    Data=np.concatenate((np.ones((1,)),data),axis=1)
-    dataMat=np.mat(Data)
-    return np.dot(dataMat,W)
+    Data = np.concatenate([data, [1]])
+    return np.dot(Data,W)
 
 def read_data(path='./data/exp02/'):
     x = np.load(path + 'X_train.npy')
