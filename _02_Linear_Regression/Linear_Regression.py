@@ -13,28 +13,28 @@ def ridge(data):
     weight = np.matmul(np.linalg.inv(np.matmul(X.T, X)), np.matmul(X.T, y))
     y_pred=weight @ data
     return weight @ data
-
+ #计算总数据量
 def lasso(data):
-    X, y = read_data()
-    y_col=y.reshape(-1,1)
-    #X(404,6)
-    #y(404,)这是行向量！！！
-    #theta(6,1)
-    alpha = 0.01
-    epochs = 100
-    learning_rate = 0.001
-    m,n=X.shape
-    theta = np.zeros((n,1))
+    x,y=read_data()
+    epochs=100
+    Lambda=0.1
+    a=0.001#learning_rate
+    m=x.shape[0]
+    #给x添加偏置项
+    X = np.concatenate((np.ones((m,1)),x),axis=1)
+    #计算总特征数
+    n = X.shape[1]
+    #初始化W的值,要变成矩阵形式
+    W=np.mat(np.ones((n,1)))
+    #X转为矩阵形式
+    xMat = np.mat(X)
+    #y转为矩阵形式，这步非常重要,且要是m x 1的维度格式
+    yMat =np.mat(y.reshape(-1,1))
+    #循环epochs次
     for i in range(epochs):
-        gradient = (1/m)*np.dot(X.T, np.dot(X, theta) - y_col) + alpha * np.sign(theta)
-        theta = theta - learning_rate * gradient
-        print(theta)
-        print(gradient)
-        print(data)
-        theta[np.abs(theta) < alpha] = 0
-    y_pred = data@theta
-    print(y_pred)
-    return y_pred
+        gradient = xMat.T*(xMat*W-yMat)/m + Lambda * np.sign(W)
+        W=W-a * gradient
+    return np.dot(data,W)
 
 def read_data(path='./data/exp02/'):
     x = np.load(path + 'X_train.npy')
