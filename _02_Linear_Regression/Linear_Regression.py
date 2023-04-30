@@ -34,7 +34,7 @@ def lasso(data):
     for i in range(epochs):
         gradient = xMat.T*(xMat*W-yMat)/m + Lambda * np.sign(W)
         W=W-a * gradient
-    Data=np.concatenate((np.ones((m,1)),data),axis=1)
+    Data=np.concatenate((np.ones((1,)),data),axis=1)
     dataMat=np.mat(Data)
     return np.dot(dataMat,W)
 
