@@ -11,6 +11,9 @@ except ImportError as e:
 def ridge(data):
     X, y = read_data()
     weight = np.matmul(np.linalg.inv(np.matmul(X.T, X)), np.matmul(X.T, y))
+    y_pred=weight @ data
+    print(y_pred.shape)
+    print(data.shape)
     return weight @ data
 
 def lasso(data):
@@ -20,13 +23,13 @@ def lasso(data):
     #y(404,)这是行向量！！！
     #theta(6,1)
     alpha = 10
-    epochs = 10
+    epochs = 100
     learning_rate = 0.001
     m,n=X.shape
     theta = np.zeros((n,1))
     for i in range(epochs):
         gradient = np.dot(X.T, np.dot(X, theta) - y_col)/m + alpha * np.sign(theta)
-        print(gradient.shape)#应该是一个列向量
+        # print(gradient.shape)#应该是一个列向量
         theta = theta - learning_rate * gradient
         #theta[np.abs(theta) < alpha] = 0
     y_pred = data @ theta
