@@ -29,9 +29,8 @@ def lasso(data):
         gradient = np.dot(X.T, np.dot(X, theta) - y_col)/m + alpha * np.sign(theta)
         theta = theta - learning_rate * gradient
         #theta[np.abs(theta) < alpha] = 0
-    print(theta.shape)
-    print(data.shape)
-    y_pred = theta@data
+    y_pred = data@theta
+    print(y_pred)
     return y_pred
 
 def read_data(path='./data/exp02/'):
