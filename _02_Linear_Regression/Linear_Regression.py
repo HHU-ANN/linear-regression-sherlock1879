@@ -16,9 +16,9 @@ def ridge(data):
  #计算总数据量
 def lasso(data):
     x,y=read_data()#x(404,6)y(404,)
-    epochs=1e5
+    epochs=100000
     Lambda=0.1
-    a=1e-12#learning_rate
+    a=0.00000000001#learning_rate
     m=x.shape[0]
     #给x添加偏置项
     X = np.concatenate((np.ones((m,1)),x),axis=1)#(m,n+1)
