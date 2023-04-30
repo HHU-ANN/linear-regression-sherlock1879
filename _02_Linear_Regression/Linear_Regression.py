@@ -31,7 +31,7 @@ def lasso(data):
         print(theta)
         print(gradient)
         print(data)
-       # theta[np.abs(theta) < alpha] = 0
+        theta[np.abs(theta) < alpha] = 0
     y_pred = data@theta
     print(y_pred)
     return y_pred
