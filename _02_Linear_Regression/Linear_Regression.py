@@ -22,6 +22,9 @@ def lasso(data):
     theta = np.zeros((n,1))
     for i in range(epochs):
         gradient = np.dot(X.T, np.dot(X, theta) - y) + alpha * np.sign(theta)
+        print(x.shape)
+        print(y.shape)
+        print(np.dot(X, theta).shape)
         print((np.dot(X, theta) - y).shape)
         print(X.T.shape)
         print(np.dot(X.T, np.dot(X, theta) - y).shape)
