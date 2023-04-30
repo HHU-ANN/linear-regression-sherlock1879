@@ -13,7 +13,7 @@ def ridge(data):
     m=X.shape[0]
     n=X.shape[1]
     Lambda=0.1
-    weight = np.matmul(np.linalg.inv(np.matmul(X.T, X)+Lambda@np.identity(n)), np.matmul(X.T, y))
+    weight = np.matmul(np.linalg.inv(np.matmul(X.T, X)+Lambda*np.identity(n)), np.matmul(X.T, y))
     y_pred=weight @ data
     return weight @ data
 
