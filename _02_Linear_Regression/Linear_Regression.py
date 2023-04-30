@@ -22,7 +22,7 @@ def lasso(data):
     theta = np.zeros((n,1))
     for i in range(epochs):
         gradient = np.dot(X.T, np.dot(X, theta) - y) + alpha * np.sign(theta)
-        theta -= np.dot(learning_rate,theta)
+        theta = theta - learning_rate * gradient
         #theta[np.abs(theta) < alpha] = 0
     y_pred = data @ theta
     return y_pred
