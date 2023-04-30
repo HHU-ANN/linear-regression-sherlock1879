@@ -16,13 +16,17 @@ def ridge(data):
 def lasso(data):
     X, y = read_data()
     alpha = 10
-    epochs = 100
+    epochs = 10
     learning_rate = 0.001
     m,n=X.shape
     theta = np.zeros((n,1))
     for i in range(epochs):
         gradient = np.dot(X.T, np.dot(X, theta) - y) + alpha * np.sign(theta)
+        print((np.dot(X, theta) - y).shape)
+        print(X.T.shape)
         print(np.dot(X.T, np.dot(X, theta) - y).shape)
+        print((alpha * np.sign(theta)).shape)
+        print(gradient.shape)
         theta = theta - learning_rate * gradient
         #theta[np.abs(theta) < alpha] = 0
     y_pred = data @ theta
