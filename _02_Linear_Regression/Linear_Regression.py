@@ -20,7 +20,7 @@ def lasso(data):
     #X(404,6)
     #y(404,)这是行向量！！！
     #theta(6,1)
-    alpha = 0.001
+    alpha = 0.01
     epochs = 800000
     learning_rate = 1e-12
     m,n=X.shape
