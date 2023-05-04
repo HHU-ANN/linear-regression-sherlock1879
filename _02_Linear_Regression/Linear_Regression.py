@@ -20,21 +20,15 @@ except ImportError as e:
 def ridge(data):
     x, y = read_data()
     # 将x转换为n列特征的矩阵，其中n为多项式的阶数
-    poly = PolynomialFeatures(degree=2)
-    X_poly = poly.fit_transform(x)
-
-    # 将数据集拆分为训练集和测试集
-    X_train, X_test, y_train, y_test = train_test_split(X_poly, y, test_size=0.2, random_state=42)
-
-    data = data.reshape(-1, 1)
+    Data = data.reshape(-1, 1)
 
     # 创建一个线性回归模型
     model = LinearRegression()
 
     # 拟合训练数据
-    model.fit(X_train, y_train)
+    model.fit(x, y)
 
-    y_pred=model.predict(data)
+    y_pred=model.predict(Data)
 
     return y_pred
 
