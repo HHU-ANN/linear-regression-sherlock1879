@@ -9,10 +9,10 @@ except ImportError as e:
     import numpy as np
 
 try:
-    from sklearn.neighbors import KNeighborsRegressor
+    from sklearn.neural_network import MLPRegressor
 except ImportError as e:
     os.system("sudo pip3 install scikit-learn")
-    from sklearn.neighbors import KNeighborsRegressor
+    from sklearn.neural_network import MLPRegressor
 
 
 def ridge(data):
@@ -25,20 +25,10 @@ def ridge(data):
     return weight @ data
 
 def lasso(data):
-    X, y = read_data()
-    y_col=y.reshape(-1,1)
-    #X(404,6)
-    #y(404,)这是行向量！！！
-    #theta(6,1)
-    alpha = 1000
-    epochs = 25000
-    learning_rate = 1e-9
-    m,n=X.shape
-    theta = np.zeros((n,1))
-    for i in range(epochs):
-        gradient = (1/m)*np.dot(X.T, np.dot(X, theta) - y_col) + alpha * np.sign(theta)
-        theta = theta - learning_rate * gradient
-    y_pred = data@theta
+    x, y = read_data()
+    model = MLPRegressor(hidden_layer_sizes=(100, 50), activation='relu', solver='adam', max_iter=1000, random_state=42)
+    model.fit(x, y)
+    y_pred = model.predict(X_test)
     return y_pred
 
 def read_data(path='./data/exp02/'):
