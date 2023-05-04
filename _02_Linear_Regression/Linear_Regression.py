@@ -20,7 +20,7 @@ except ImportError as e:
 def ridge(data):
     x, y = read_data()
     # 将x转换为n列特征的矩阵，其中n为多项式的阶数
-    Data = data.reshape(-1, 1)
+    Data = data.reshape(1,-1)
 
     # 创建一个线性回归模型
     model = LinearRegression()
