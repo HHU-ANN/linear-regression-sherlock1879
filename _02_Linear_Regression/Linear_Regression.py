@@ -27,8 +27,9 @@ def ridge(data):
 def lasso(data):
     x, y = read_data()
     model = MLPRegressor(hidden_layer_sizes=(100, 50), activation='relu', solver='adam', max_iter=1000, random_state=42)
+    Data = data.reshape(1, -1)
     model.fit(x, y)
-    y_pred = model.predict(X_test)
+    y_pred = model.predict(Data)
     return y_pred
 
 def read_data(path='./data/exp02/'):
