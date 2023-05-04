@@ -1,6 +1,8 @@
 # 最终在main函数中传入一个维度为6的numpy数组，输出预测值
 
 import os
+from scipy.optimize import curve_fit
+import matplotlib.pyplot as plt
 
 try:
     import numpy as np
@@ -8,14 +10,14 @@ except ImportError as e:
     os.system("sudo pip3 install numpy")
     import numpy as np
 
+def func(x, a, b, c):
+    return a * x**2 + b * x + c
+
 def ridge(data):
-    X, y = read_data()
-    m = X.shape[0]
-    n = X.shape[1]
-    Lambda = 500
-    weight = np.matmul(np.linalg.inv(np.matmul(X.T, X) + Lambda * np.identity(n)), np.matmul(X.T, y))
-    y_pred = weight @ data
-    return weight @ data
+    x, y = read_data()
+    popt,pcov=curve_fit(func,x,y)
+    y_pred=func(data,*popt)
+    return y_pred
 
 def lasso(data):
     X, y = read_data()
