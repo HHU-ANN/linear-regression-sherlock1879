@@ -1,8 +1,6 @@
 # 最终在main函数中传入一个维度为6的numpy数组，输出预测值
 
 import os
-from scipy.optimize import curve_fit
-import matplotlib.pyplot as plt
 
 try:
     import numpy as np
@@ -10,14 +8,11 @@ except ImportError as e:
     os.system("sudo pip3 install numpy")
     import numpy as np
 
-def func(x, a, b, c):
-    return a * x**2 + b * x + c
-
 def ridge(data):
     x, y = read_data()
-    popt,pcov=curve_fit(func,x,y)
-    y_pred=func(data,*popt)
-    return y_pred
+    z = np.polyfit(x, y, 2)  # 用二次函数拟合数据
+    predict_y = np.polyval(z, data)  # 计算预测的y值
+    return predict_y
 
 def lasso(data):
     X, y = read_data()
