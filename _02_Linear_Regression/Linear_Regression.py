@@ -12,7 +12,10 @@ try:
     import sklearn
 except ImportError as e:
     os.system("sudo pip3 install scikit-learn")
-    import sklearn
+    from sklearn.linear_model import LinearRegression
+    from sklearn.preprocessing import PolynomialFeatures
+    from sklearn.model_selection import train_test_split
+    from sklearn.metrics import mean_squared_error
 
 def ridge(data):
     x, y = read_data()
