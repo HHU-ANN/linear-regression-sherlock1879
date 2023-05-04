@@ -8,12 +8,30 @@ except ImportError as e:
     os.system("sudo pip3 install numpy")
     import numpy as np
 
+try:
+    import sklearn
+except ImportError as e:
+    os.system("sudo pip3 install sklearn")
+    import sklearn
+
 def ridge(data):
     x, y = read_data()
-    x_flat = np.ravel(x)  # 或者 x_flat = np.reshape(x, (-1, 1))
-    z = np.polyfit(x_flat, y, 2)  # 用二次函数拟合数据
-    predict_y = np.polyval(z, data)  # 计算预测的y值
-    return predict_y
+    # 将x转换为n列特征的矩阵，其中n为多项式的阶数
+    poly = PolynomialFeatures(degree=2)
+    X_poly = poly.fit_transform(x)
+
+    # 将数据集拆分为训练集和测试集
+    X_train, X_test, y_train, y_test = train_test_split(X_poly, y, test_size=0.2, random_state=42)
+
+    # 创建一个线性回归模型
+    model = LinearRegression()
+
+    # 拟合训练数据
+    model.fit(X_train, y_train)
+
+    y_pred=model.predict(data)
+
+    return y_pred
 
 def lasso(data):
     X, y = read_data()
