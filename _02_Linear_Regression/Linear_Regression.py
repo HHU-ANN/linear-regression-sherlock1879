@@ -26,6 +26,8 @@ def ridge(data):
     # 将数据集拆分为训练集和测试集
     X_train, X_test, y_train, y_test = train_test_split(X_poly, y, test_size=0.2, random_state=42)
 
+    data = data.reshape(-1, 1)
+
     # 创建一个线性回归模型
     model = LinearRegression()
 
