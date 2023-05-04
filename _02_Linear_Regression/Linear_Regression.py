@@ -16,20 +16,13 @@ except ImportError as e:
 
 
 def ridge(data):
-    x, y = read_data()
-    # 将x转换为n列特征的矩阵，其中n为多项式的阶数
-    Data = data.reshape(1,-1)
-
-    # 创建一个线性回归模型
-    n_neighbors = 15  # 设置最近邻居的数量
-    knn = KNeighborsRegressor(n_neighbors=n_neighbors)
-
-    # 拟合训练数据
-    knn.fit(x, y)
-
-    y_pred=knn.predict(Data)
-
-    return y_pred
+    X, y = read_data()
+    m=X.shape[0]
+    n=X.shape[1]
+    Lambda=-0.1
+    weight = np.matmul(np.linalg.inv(np.matmul(X.T, X)+Lambda*np.identity(n)), np.matmul(X.T, y))
+    y_pred=weight @ data
+    return weight @ data
 
 def lasso(data):
     X, y = read_data()
