@@ -9,29 +9,13 @@ except ImportError as e:
     import numpy as np
 
 def ridge(data):
-    x, y = read_data()
-    degree=2
-    alpha=0.1
-    # 增加多项式特征
-    x_poly = np.ones_like(x)
-    for d in range(1, degree + 1):
-        x_poly = np.hstack((x_poly, np.power(x, d)))
-
-    # 添加正则化项
-    xtx = np.dot(x_poly.T, x_poly)
-    reg_term = alpha * np.eye(xtx.shape[0])
-    xtx_reg = xtx + reg_term
-
-    # 求解系数
-    xty = np.dot(x_poly.T, y)
-    w = np.linalg.solve(xtx_reg, xty)
-
-    # 预测结果
-    x_new_poly = np.ones((1, x.shape[1]))
-    for d in range(1, degree + 1):
-        x_new_poly = np.hstack((x_new_poly, np.power(x, d)))
-    y_pred = np.dot(x_new_poly, w)
-    return y_pred
+    X, y = read_data()
+    m = X.shape[0]
+    n = X.shape[1]
+    Lambda = 500
+    weight = np.matmul(np.linalg.inv(np.matmul(X.T, X) + Lambda * np.identity(n)), np.matmul(X.T, y))
+    y_pred = weight @ data
+    return weight @ data
 
 def lasso(data):
     X, y = read_data()
