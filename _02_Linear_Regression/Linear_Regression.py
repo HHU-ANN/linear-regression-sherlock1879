@@ -9,13 +9,10 @@ except ImportError as e:
     import numpy as np
 
 try:
-    import sklearn
+    from sklearn.linear_model import LinearRegression
 except ImportError as e:
     os.system("sudo pip3 install scikit-learn")
     from sklearn.linear_model import LinearRegression
-    from sklearn.preprocessing import PolynomialFeatures
-    from sklearn.model_selection import train_test_split
-    from sklearn.metrics import mean_squared_error
 
 def ridge(data):
     x, y = read_data()
