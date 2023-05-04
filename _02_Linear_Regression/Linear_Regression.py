@@ -11,7 +11,7 @@ except ImportError as e:
 try:
     import sklearn
 except ImportError as e:
-    os.system("sudo pip3 install sklearn")
+    os.system("sudo pip3 install scikit-learn")
     import sklearn
 
 def ridge(data):
