@@ -21,7 +21,7 @@ def ridge(data):
     Data = data.reshape(1,-1)
 
     # 创建一个线性回归模型
-    n_neighbors = 20  # 设置最近邻居的数量
+    n_neighbors = 15  # 设置最近邻居的数量
     knn = KNeighborsRegressor(n_neighbors=n_neighbors)
 
     # 拟合训练数据
