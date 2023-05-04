@@ -10,7 +10,8 @@ except ImportError as e:
 
 def ridge(data):
     x, y = read_data()
-    z = np.polyfit(x, y, 2)  # 用二次函数拟合数据
+    x_flat = np.ravel(x)  # 或者 x_flat = np.reshape(x, (-1, 1))
+    z = np.polyfit(x_flat, y, 2)  # 用二次函数拟合数据
     predict_y = np.polyval(z, data)  # 计算预测的y值
     return predict_y
 
