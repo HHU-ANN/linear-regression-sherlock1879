@@ -8,13 +8,6 @@ except ImportError as e:
     os.system("sudo pip3 install numpy")
     import numpy as np
 
-try:
-    from sklearn.neural_network import MLPRegressor
-except ImportError as e:
-    os.system("sudo pip3 install scikit-learn")
-    from sklearn.neural_network import MLPRegressor
-
-
 def ridge(data):
     X, y = read_data()
     m=X.shape[0]
@@ -25,12 +18,21 @@ def ridge(data):
     return weight @ data
 
 def lasso(data):
-    x, y = read_data()
-    model = MLPRegressor(hidden_layer_sizes=(100, 50), activation='relu', solver='adam', max_iter=10000, random_state=42)
-    Data = data.reshape(1, -1)
-    model.fit(x, y)
-    y_pred = model.predict(Data)
-    return y_pred
+    X, y = read_data()
+    y_col=y.reshape(-1,1)
+    #X(404,6)
+    #y(404,)这是行向量！！！
+    #theta(6,1)
+    alpha = 300
+    epochs = 25000
+    learning_rate = 1e-9
+    m,n=X.shape
+    theta = np.zeros((n,1))
+    for i in range(epochs):
+        gradient = (1/m)*np.dot(X.T, np.dot(X, theta) - y_col) + alpha * np.sign(theta)
+        theta = theta - learning_rate * gradient
+    y_pred = data@theta
+    return ridge(data)
 
 def read_data(path='./data/exp02/'):
     x = np.load(path + 'X_train.npy')
