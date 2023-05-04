@@ -9,10 +9,11 @@ except ImportError as e:
     import numpy as np
 
 try:
-    from sklearn.linear_model import LinearRegression
+    from sklearn.neighbors import KNeighborsRegressor
 except ImportError as e:
     os.system("sudo pip3 install scikit-learn")
-    from sklearn.linear_model import LinearRegression
+    from sklearn.neighbors import KNeighborsRegressor
+
 
 def ridge(data):
     x, y = read_data()
@@ -20,12 +21,13 @@ def ridge(data):
     Data = data.reshape(1,-1)
 
     # 创建一个线性回归模型
-    model = LinearRegression()
+    n_neighbors = 5  # 设置最近邻居的数量
+    knn = KNeighborsRegressor(n_neighbors=n_neighbors)
 
     # 拟合训练数据
-    model.fit(x, y)
+    knn.fit(x, y)
 
-    y_pred=model.predict(Data)
+    y_pred=knn.predict(Data)
 
     return y_pred
 
