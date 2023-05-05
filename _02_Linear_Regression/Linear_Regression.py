@@ -32,7 +32,7 @@ def ridge(data):
 def lasso(data):
     x, y = read_data()
     model = LinearRegression()
-    ransac = RANSACRegressor(base_estimator=model, min_samples=50, residual_threshold=3, max_trials=200,stop_n_inliers=108,stop_probability=0.95)
+    ransac = RANSACRegressor(base_estimator=model, min_samples=50, residual_threshold=3, max_trials=200,stop_n_inliers=107,stop_probability=0.95)
     Data = data.reshape(1, -1)
     ransac.fit(x, y)
     y_pred = ransac.predict(Data)
