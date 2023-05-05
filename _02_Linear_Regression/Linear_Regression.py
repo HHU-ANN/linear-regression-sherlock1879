@@ -23,9 +23,9 @@ def lasso(data):
     #X(404,6)
     #y(404,)这是行向量！！！
     #theta(6,1)
-    alpha = 300
-    epochs = 25000
-    learning_rate = 1e-9
+    alpha = 0.03
+    epochs = 1000000
+    learning_rate = 1e-10
     m,n=X.shape
     X_interact = np.hstack([X, X[:,0].reshape(-1,1)*X[:,1].reshape(-1,1)])
     theta = np.zeros((n+1,1))
