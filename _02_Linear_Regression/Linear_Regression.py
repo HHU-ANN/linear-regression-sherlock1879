@@ -8,18 +8,6 @@ except ImportError as e:
     os.system("sudo pip3 install numpy")
     import numpy as np
 
-try:
-    from sklearn.linear_model import RANSACRegressor
-except ImportError as e:
-    os.system("sudo pip3 install scikit-learn")
-    from sklearn.linear_model import RANSACRegressor
-
-try:
-    from sklearn.linear_model import LinearRegression
-except ImportError as e:
-    os.system("sudo pip3 install scikit-learn")
-    from sklearn.linear_model import LinearRegression
-
 def ridge(data):
     X, y = read_data()
     m=X.shape[0]
@@ -30,12 +18,21 @@ def ridge(data):
     return weight @ data
 
 def lasso(data):
-    x, y = read_data()
-    model = LinearRegression()
-    ransac = RANSACRegressor(base_estimator=model, min_samples=50, residual_threshold=3, max_trials=200,stop_n_inliers=108,stop_probability=0.95)
-    Data = data.reshape(1, -1)
-    ransac.fit(x, y)
-    y_pred = ransac.predict(Data)
+    X, y = read_data()
+    y_col=y.reshape(-1,1)
+    #X(404,6)
+    #y(404,)这是行向量！！！
+    #theta(6,1)
+    alpha = 300
+    epochs = 25000
+    learning_rate = 1e-9
+    m,n=X.shape
+    X_interact = np.hstack([X, X[:,0].reshape(-1,1)*X[:,1].reshape(-1,1)])
+    theta = np.zeros((n+1,1))
+    for i in range(epochs):
+        gradient = (1/m)*np.dot(X_interact.T, np.dot(X_interact, theta) - y_col) + alpha * np.sign(theta)
+        theta = theta - learning_rate * gradient
+    y_pred = data@theta[:-1] + theta[-1]
     return y_pred
 
 def read_data(path='./data/exp02/'):
